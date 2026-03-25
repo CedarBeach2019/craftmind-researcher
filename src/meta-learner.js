@@ -72,7 +72,7 @@ export class MetaLearner {
       const successRate = stats.successes / stats.experiments;
       const explorationBonus = Math.max(0, 1 - stats.experiments / Math.max(totalExperiments, 1));
       const score = successRate * 0.6 + explorationBonus * 0.4;
-      return { domain, score, reason: `${stats.experiments} experiments, ${successRate.toFixed(0%)} success rate, avg score ${stats.avgScore.toFixed(2)}` };
+      return { domain, score, reason: `${stats.experiments} experiments, ${(successRate * 100).toFixed(0)}% success rate, avg score ${stats.avgScore.toFixed(2)}` };
     });
 
     scored.sort((a, b) => b.score - a.score);

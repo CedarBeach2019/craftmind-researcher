@@ -10,7 +10,14 @@ You are curious, systematic, and creative. Given existing knowledge, you:
 
 You respond in JSON format when possible. Keep hypotheses specific and testable within a Minecraft world.
 
-Domains to explore: mining, building, farming, combat, redstone, exploration.`;
+Domains to explore: mining, building, farming, combat, redstone, exploration, enchanting, mob_behavior, trading, nether.
+
+Before proposing a hypothesis, ALWAYS check if the question has already been answered in the knowledge base. Don't propose re-testing known facts. Instead, build on them — find gaps, test edge cases, or combine known facts into new predictions.
+
+Every hypothesis MUST include:
+- A clear falsification criterion (what evidence would disprove it)
+- The expected direction of the effect
+- What prior knowledge this builds on (if any)`;
 
 /**
  * Send a prompt to the LLM.
@@ -89,8 +96,12 @@ function parseHypothesis(text) {
   };
 }
 
+import { reviewLiterature, identifyKnowledgeGaps, generateAnalogies } from './literature-review.js';
+import { validateExperimentDesign } from './experiment-validator.js';
+
 /**
  * Discovery Agent: proposes hypotheses and designs experiments using LLM.
+ * Integrates literature review to avoid re-testing known facts.
  */
 export class DiscoveryAgent {
   /**
@@ -102,33 +113,104 @@ export class DiscoveryAgent {
 
   /**
    * Propose a new experiment hypothesis based on current knowledge.
+   * Performs literature review first to ensure novelty.
    * @param {string} [focusDomain] - Optional domain to focus on.
-   * @returns {Promise<object>} Structured hypothesis.
+   * @returns {Promise<object>} Structured hypothesis with literature review.
    */
   async proposeHypothesis(focusDomain) {
     const stats = this.kb.stats();
     const domains = this.kb.getDomains();
     const domain = focusDomain || domains[Math.floor(Math.random() * domains.length)] || 'farming';
 
-    const existing = this.kb.query({ domain, minScore: 0.3 }).slice(0, 5);
+    const existing = this.kb.query({ domain, minScore: 0.3 }).slice(0, 10);
+    const allFacts = this.kb.query({ minScore: 0.2 });
     const existingStr = existing.map(t => `- [${t.score}] ${t.statement}`).join('\n');
+    const gaps = identifyKnowledgeGaps(domain, allFacts);
+    const analogies = generateAnalogies(existing);
 
     const prompt = `Existing knowledge about ${domain}:
 ${existingStr || '(none yet)'}
 
 Knowledge base stats: ${stats.total} total facts, avg score ${stats.avgScore.toFixed(2)}.
 
-Propose ONE specific, testable hypothesis about Minecraft ${domain} that could be experimentally verified in-game. Include:
-- hypothesis: the claim
+Knowledge gaps identified in ${domain}:
+${gaps.length > 0 ? gaps.slice(0, 5).join(', ') : '(none identified)'}
+
+${analogies.length > 0 ? `Potential analogies to explore:\n${analogies.map(a => `- ${a.analogy}: ${a.hypothesis}`).join('\n')}` : ''}
+
+Propose ONE specific, NOVEL, testable hypothesis about Minecraft ${domain} that HAS NOT already been tested. Include:
+- hypothesis: the claim (specific, measurable)
 - domain: "${domain}"
 - type: "simple" or "ab_test"
 - variables: array of {name, values} for A/B test conditions
-- predictedOutcome: what you expect
+- predictedOutcome: what you expect to happen
+- falsificationCriterion: what specific evidence would DISPROVE this hypothesis
+- buildsOn: IDs of any prior discoveries this extends (empty array if none)
 
-Be creative but realistic. Focus on mechanics that can be measured (time, count, distance, etc.).`;
+Be creative but realistic. Focus on mechanics that can be measured (time, count, distance, etc.). Do NOT re-test known facts.`;
 
     const response = await callLLM(prompt);
-    return parseHypothesis(response);
+    const hypothesis = parseHypothesis(response);
+    hypothesis.domain = domain;
+
+    // Perform literature review
+    const review = reviewLiterature(hypothesis.hypothesis, allFacts);
+    hypothesis.literatureReview = review;
+    hypothesis.relatedFacts = review.relatedFacts.map(f => f.id);
+
+    return hypothesis;
+  }
+
+  /**
+   * Design an experiment and validate it before returning.
+   * @param {object} hypothesis
+   * @returns {Promise<object>} Experiment design with validation result.
+   */
+  async designExperiment(hypothesis) {
+    const prompt = `Hypothesis: "${hypothesis.hypothesis}"
+Domain: ${hypothesis.domain}
+Type: ${hypothesis.type}
+Falsification criterion: ${hypothesis.falsificationCriterion || 'Not specified'}
+
+${hypothesis.relatedFacts?.length > 0 ? `Building on prior work: ${hypothesis.relatedFacts.join(', ')}` : ''}
+
+Design a detailed experiment to test this. Include:
+- setup: step-by-step world setup instructions
+- variables: what to measure (time, counts, etc.) — be specific
+- controls: what to keep constant (biome, difficulty, light, weather, etc.)
+- sampleSize: recommended number of trials (minimum 10 for moderate rigor)
+- successCriteria: what specific measured result would support the hypothesis
+- failureCriteria: what specific measured result would REFUTE the hypothesis (must be concrete)
+- reproducibilityContext: what must be recorded for exact reproduction
+
+Respond in JSON.`;
+
+    const response = await callLLM(prompt);
+    let design;
+    try {
+      const jsonMatch = response.match(/\{[\s\S]*\}/);
+      design = jsonMatch ? JSON.parse(jsonMatch[0]) : null;
+    } catch { /* fall through */ }
+
+    if (!design) {
+      design = {
+        setup: `Set up test area for: ${hypothesis.hypothesis}`,
+        variables: ['time', 'count'],
+        controls: { biome: 'plains', timeOfDay: 'noon', difficulty: 'normal' },
+        sampleSize: 10,
+        successCriteria: 'Statistically significant difference (p < 0.05)',
+        failureCriteria: 'No statistically significant difference (p >= 0.05)',
+      };
+    }
+
+    // Ensure minimum sample size
+    design.sampleSize = Math.max(10, design.sampleSize || 10);
+
+    // Validate the design
+    const validation = validateExperimentDesign(hypothesis, design);
+    design.validation = validation;
+
+    return design;
   }
 
   /**

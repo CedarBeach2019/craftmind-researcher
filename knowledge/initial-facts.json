@@ -1,5 +1,6 @@
 {
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "description": "Pre-seeded Minecraft facts across all research domains.",
   "generatedAt": "2026-03-25T00:00:00Z",
   "facts": [
     {
@@ -8,7 +9,26 @@
       "statement": "Water flows up to 7 blocks from the source block on flat terrain.",
       "confidence": 1.0,
       "verified": true,
-      "source": "initial-seed"
+      "source": "initial-seed",
+      "tags": ["fluid", "physics", "building"]
+    },
+    {
+      "id": "lava-flow-overworld",
+      "domain": "building",
+      "statement": "Lava flows up to 4 blocks from the source in the Overworld.",
+      "confidence": 1.0,
+      "verified": true,
+      "source": "initial-seed",
+      "tags": ["fluid", "physics", "building"]
+    },
+    {
+      "id": "lava-flow-nether",
+      "domain": "nether",
+      "statement": "Lava flows up to 8 blocks from the source in the Nether (double the Overworld distance).",
+      "confidence": 1.0,
+      "verified": true,
+      "source": "initial-seed",
+      "tags": ["fluid", "physics", "nether"]
     },
     {
       "id": "crop-light",
@@ -16,7 +36,8 @@
       "statement": "Crops require a minimum light level of 9 to grow.",
       "confidence": 1.0,
       "verified": true,
-      "source": "initial-seed"
+      "source": "initial-seed",
+      "tags": ["farming", "light"]
     },
     {
       "id": "crop-hydration",
@@ -24,7 +45,8 @@
       "statement": "Farmland within 4 blocks of water is hydrated and causes crops to grow faster.",
       "confidence": 1.0,
       "verified": true,
-      "source": "initial-seed"
+      "source": "initial-seed",
+      "tags": ["farming", "hydration", "water"]
     },
     {
       "id": "fall-damage",
@@ -32,7 +54,8 @@
       "statement": "Fall damage begins at 3+ blocks. Each block after deals ~1 heart. 23+ blocks is fatal at full health.",
       "confidence": 1.0,
       "verified": true,
-      "source": "initial-seed"
+      "source": "initial-seed",
+      "tags": ["damage", "physics"]
     },
     {
       "id": "tool-tier",
@@ -40,7 +63,8 @@
       "statement": "Higher-tier tools mine faster: wood < stone < iron < diamond < netherite.",
       "confidence": 1.0,
       "verified": true,
-      "source": "initial-seed"
+      "source": "initial-seed",
+      "tags": ["mining", "tools"]
     },
     {
       "id": "torch-prevent-spawn",
@@ -48,7 +72,8 @@
       "statement": "Torches with light level 14 prevent hostile mob spawning in a 7-block radius.",
       "confidence": 1.0,
       "verified": true,
-      "source": "initial-seed"
+      "source": "initial-seed",
+      "tags": ["light", "spawning", "building"]
     },
     {
       "id": "cobblestone-gen",
@@ -56,7 +81,8 @@
       "statement": "Lava flowing into water creates cobblestone; water flowing into lava creates obsidian.",
       "confidence": 1.0,
       "verified": true,
-      "source": "initial-seed"
+      "source": "initial-seed",
+      "tags": ["redstone", "fluid", "cobblestone"]
     },
     {
       "id": "crop-bone-meal",
@@ -64,7 +90,62 @@
       "statement": "Bone meal can instantly advance crop growth by 1-7 stages.",
       "confidence": 0.95,
       "verified": true,
-      "source": "initial-seed"
+      "source": "initial-seed",
+      "tags": ["farming", "bone_meal"]
+    },
+    {
+      "id": "enchant-bookshelf-max",
+      "domain": "enchanting",
+      "statement": "An enchanting table requires 15 bookshelves to reach maximum enchantment level (level 30).",
+      "confidence": 1.0,
+      "verified": true,
+      "source": "initial-seed",
+      "tags": ["enchanting", "bookshelf"]
+    },
+    {
+      "id": "fortune-ore-drops",
+      "domain": "mining",
+      "statement": "Fortune III on diamond ore can yield up to 4 diamonds per block (1 base + 3 bonus).",
+      "confidence": 0.95,
+      "verified": true,
+      "source": "initial-seed",
+      "tags": ["mining", "enchanting", "fortune"]
+    },
+    {
+      "id": "creeper-cat-fear",
+      "domain": "mob_behavior",
+      "statement": "Creepers flee from cats and ocelots, aborting their explosion if within 6 blocks.",
+      "confidence": 1.0,
+      "verified": true,
+      "source": "initial-seed",
+      "tags": ["mob", "creeper", "cat"]
+    },
+    {
+      "id": "piglin-bartering",
+      "domain": "nether",
+      "statement": "Piglins will barter with the player when given gold items, producing random nether-related loot.",
+      "confidence": 1.0,
+      "verified": true,
+      "source": "initial-seed",
+      "tags": ["nether", "piglin", "trading"]
+    },
+    {
+      "id": "librarian-optimize",
+      "domain": "trading",
+      "statement": "Breaking and replacing a librarian villager's lectern re-rolls their first trade, allowing optimization for specific enchanted books.",
+      "confidence": 0.95,
+      "verified": true,
+      "source": "initial-seed",
+      "tags": ["trading", "villager", "enchanting"]
+    },
+    {
+      "id": "mending-repair",
+      "domain": "enchanting",
+      "statement": "Mending repairs tools using XP orbs, with each orb repairing 2 durability per XP point.",
+      "confidence": 1.0,
+      "verified": true,
+      "source": "initial-seed",
+      "tags": ["enchanting", "mending", "repair"]
     }
   ]
 }

@@ -1,0 +1,92 @@
+{
+  "domainStats": {
+    "mining": {
+      "experiments": 6,
+      "totalScore": 3.6,
+      "successes": 3,
+      "avgScore": 0.6
+    },
+    "farming": {
+      "experiments": 6,
+      "totalScore": 5.550000000000001,
+      "successes": 6,
+      "avgScore": 0.9250000000000002
+    }
+  },
+  "strategyLog": [
+    {
+      "timestamp": 1774429149594,
+      "domain": "mining",
+      "hypothesis": "Hypothesis 1",
+      "score": 0.8
+    },
+    {
+      "timestamp": 1774429149594,
+      "domain": "mining",
+      "hypothesis": "Hypothesis 2",
+      "score": 0.4
+    },
+    {
+      "timestamp": 1774429149594,
+      "domain": "farming",
+      "hypothesis": "Hypothesis 3",
+      "score": 0.9
+    },
+    {
+      "timestamp": 1774429149595,
+      "domain": "farming",
+      "hypothesis": "Another farm",
+      "score": 0.95
+    },
+    {
+      "timestamp": 1774429155438,
+      "domain": "mining",
+      "hypothesis": "Hypothesis 1",
+      "score": 0.8
+    },
+    {
+      "timestamp": 1774429155439,
+      "domain": "mining",
+      "hypothesis": "Hypothesis 2",
+      "score": 0.4
+    },
+    {
+      "timestamp": 1774429155439,
+      "domain": "farming",
+      "hypothesis": "Hypothesis 3",
+      "score": 0.9
+    },
+    {
+      "timestamp": 1774429155441,
+      "domain": "farming",
+      "hypothesis": "Another farm",
+      "score": 0.95
+    },
+    {
+      "timestamp": 1774429187274,
+      "domain": "mining",
+      "hypothesis": "Hypothesis 1",
+      "score": 0.8
+    },
+    {
+      "timestamp": 1774429187275,
+      "domain": "mining",
+      "hypothesis": "Hypothesis 2",
+      "score": 0.4
+    },
+    {
+      "timestamp": 1774429187275,
+      "domain": "farming",
+      "hypothesis": "Hypothesis 3",
+      "score": 0.9
+    },
+    {
+      "timestamp": 1774429187275,
+      "domain": "farming",
+      "hypothesis": "Another farm",
+      "score": 0.95
+    }
+  ],
+  "totalExperiments": 12,
+  "totalDiscoveries": 9
+}

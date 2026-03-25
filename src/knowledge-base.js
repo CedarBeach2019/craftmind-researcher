@@ -22,13 +22,20 @@ export class KnowledgeBase {
   /** @type {Map<string, object>} */
   get cache() { return this._cache; }
 
-  /** Load pre-seeded facts into the cache. */
+  /** Load pre-seeded facts from all JSON files in the knowledge directory. */
   _loadInitialFacts() {
-    const initialPath = join(KNOWLEDGE_DIR, 'initial-facts.json');
-    if (!existsSync(initialPath)) return;
-    const data = JSON.parse(readFileSync(initialPath, 'utf8'));
-    for (const fact of data.facts) {
-      this._cache.set(fact.id, { ...fact, revisions: fact.revisions || [] });
+    const factFiles = ['initial-facts.json', 'building-techniques.json'];
+    for (const fileName of factFiles) {
+      const filePath = join(KNOWLEDGE_DIR, fileName);
+      if (!existsSync(filePath)) continue;
+      try {
+        const data = JSON.parse(readFileSync(filePath, 'utf8'));
+        for (const fact of data.facts) {
+          this._cache.set(fact.id, { ...fact, revisions: fact.revisions || [] });
+        }
+      } catch (err) {
+        console.warn(`[KnowledgeBase] Failed to load ${fileName}: ${err.message}`);
+      }
     }
   }
 

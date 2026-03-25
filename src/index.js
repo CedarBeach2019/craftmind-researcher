@@ -31,29 +31,7 @@ export * from './statistics.js';
 export { validateExperimentDesign, estimateRequiredSampleSize } from './experiment-validator.js';
 export { reviewLiterature, identifyKnowledgeGaps, generateAnalogies } from './literature-review.js';
 
-import { runCycle } from './cycle.js';
-import { KnowledgeBase } from './knowledge-base.js';
-import { DiscoveryAgent } from './discovery-agent.js';
-import { Experiment } from './experiment.js';
-import { CriticAgent } from './critic-agent.js';
-import { TeacherAgent } from './teacher-agent.js';
-import { DistillerAgent } from './distiller-agent.js';
-import { MetaLearner } from './meta-learner.js';
-
-export { runCycle } from './cycle.js';
-export { KnowledgeBase } from './knowledge-base.js';
-export { DiscoveryAgent } from './discovery-agent.js';
-export { Experiment } from './experiment.js';
-export { CriticAgent } from './critic-agent.js';
-export { TeacherAgent } from './teacher-agent.js';
-export { DistillerAgent } from './distiller-agent.js';
-export { MetaLearner } from './meta-learner.js';
-export { CitationNetwork } from './citation-network.js';
-export { KnowledgeExport } from './knowledge-export.js';
-export { generatePaper, paperToMarkdown } from './research-paper.js';
-export * from './statistics.js';
-export { validateExperimentDesign, estimateRequiredSampleSize } from './experiment-validator.js';
-export { reviewLiterature, identifyKnowledgeGaps, generateAnalogies } from './literature-review.js';
+// runCycle defined inline below
 
 /**
  * Register researcher features with CraftMind Core.
@@ -339,12 +317,15 @@ function _runDemoExperiment(experiment) {
   }
 }
 
-// CLI entry point
-const args = process.argv.slice(2);
-if (args.includes('--single-run') || args.length === 0) {
-  const domain = args.includes('--demo') ? 'farming' : undefined;
-  runCycle({ focusDomain: domain }).catch(err => {
-    console.error('❌ Cycle failed:', err);
-    process.exit(1);
-  });
+// CLI entry point — only run when executed directly
+import { fileURLToPath } from 'url';
+if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
+  const args = process.argv.slice(2);
+  if (args.includes('--single-run') || args.length === 0) {
+    const domain = args.includes('--demo') ? 'farming' : undefined;
+    runCycle({ focusDomain: domain }).catch(err => {
+      console.error('❌ Cycle failed:', err);
+      process.exit(1);
+    });
+  }
 }

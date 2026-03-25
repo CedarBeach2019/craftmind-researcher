@@ -1,0 +1,18 @@
+{
+  "name": "craftmind-researcher",
+  "version": "0.1.0",
+  "description": "AI self-improvement system where Minecraft bots discover, learn, and teach new techniques autonomously",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "experiment": "node src/index.js --single-run",
+    "demo": "node src/index.js --demo"
+  },
+  "keywords": ["minecraft", "ai", "self-improvement", "autoresearch", "mineflayer"],
+  "license": "MIT",
+  "dependencies": {
+    "mineflayer": "^4.20.0",
+    "vec3": "^0.1.10"
+  }
+}

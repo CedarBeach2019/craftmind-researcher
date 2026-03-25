@@ -1,0 +1,70 @@
+{
+  "version": "0.1.0",
+  "generatedAt": "2026-03-25T00:00:00Z",
+  "facts": [
+    {
+      "id": "water-flow",
+      "domain": "building",
+      "statement": "Water flows up to 7 blocks from the source block on flat terrain.",
+      "confidence": 1.0,
+      "verified": true,
+      "source": "initial-seed"
+    },
+    {
+      "id": "crop-light",
+      "domain": "farming",
+      "statement": "Crops require a minimum light level of 9 to grow.",
+      "confidence": 1.0,
+      "verified": true,
+      "source": "initial-seed"
+    },
+    {
+      "id": "crop-hydration",
+      "domain": "farming",
+      "statement": "Farmland within 4 blocks of water is hydrated and causes crops to grow faster.",
+      "confidence": 1.0,
+      "verified": true,
+      "source": "initial-seed"
+    },
+    {
+      "id": "fall-damage",
+      "domain": "combat",
+      "statement": "Fall damage begins at 3+ blocks. Each block after deals ~1 heart. 23+ blocks is fatal at full health.",
+      "confidence": 1.0,
+      "verified": true,
+      "source": "initial-seed"
+    },
+    {
+      "id": "tool-tier",
+      "domain": "mining",
+      "statement": "Higher-tier tools mine faster: wood < stone < iron < diamond < netherite.",
+      "confidence": 1.0,
+      "verified": true,
+      "source": "initial-seed"
+    },
+    {
+      "id": "torch-prevent-spawn",
+      "domain": "building",
+      "statement": "Torches with light level 14 prevent hostile mob spawning in a 7-block radius.",
+      "confidence": 1.0,
+      "verified": true,
+      "source": "initial-seed"
+    },
+    {
+      "id": "cobblestone-gen",
+      "domain": "redstone",
+      "statement": "Lava flowing into water creates cobblestone; water flowing into lava creates obsidian.",
+      "confidence": 1.0,
+      "verified": true,
+      "source": "initial-seed"
+    },
+    {
+      "id": "crop-bone-meal",
+      "domain": "farming",
+      "statement": "Bone meal can instantly advance crop growth by 1-7 stages.",
+      "confidence": 0.95,
+      "verified": true,
+      "source": "initial-seed"
+    }
+  ]
+}

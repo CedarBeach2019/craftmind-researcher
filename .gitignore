@@ -1,0 +1,5 @@
+node_modules/
+knowledge/discovered/
+*.log
+.env
+.DS_Store

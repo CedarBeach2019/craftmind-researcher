@@ -428,3 +428,6 @@ describe('MetaLearner', () => {
     assert.equal(meta.getStats().totalExperiments, 2);
   });
 });
+
+// ─── AI Research System Tests ─────────────────────────────────────
+import './test-ai.js';

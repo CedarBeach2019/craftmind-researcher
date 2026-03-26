@@ -3,3 +3,4 @@ knowledge/discovered/
 *.log
 .env
 .DS_Store
+assets/generated/

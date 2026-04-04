@@ -1,118 +1,55 @@
-# 🧪 CraftMind Researcher
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Lucineer/capitaine/master/docs/capitaine-logo.jpg" alt="Capitaine" width="120">
+</p>
 
-> AI science lab for Minecraft — form hypotheses, run experiments, publish papers.
+<h1 align="center">craftmind-researcher</h1>
 
-## Features
+<p align="center">AI self-improvement for Minecraft bots.</p>
 
-- **Discovery Cycle** — Full pipeline: hypothesis → experiment → analysis → paper
-- **Literature Review** — Knowledge gap detection and analogy generation
-- **Experiment Engine** — A/B tests, controlled trials with statistical analysis
-- **Critic Agent** — Evaluates research rigor, suggests improvements
-- **Behavior Scripts** — Distills findings into reusable Minecraft behaviors
-- **Citation Network** — Tracks knowledge relationships and dependencies
-- **Meta-Learner** — Recommends research domains based on past success
-- **Knowledge Base** — Persistent storage with export capabilities
+---
 
-## Quick Start
+**CraftMind ecosystem** · Part of the [Lucineer fleet](https://github.com/orgs/Lucineer/repositories)
 
-```bash
-npm install
-node examples/demo.js    # Run standalone demo
-node scripts/playtest.js # Simulated plugin test
-npm test                 # Run test suite (43 tests)
-```
+## The Fleet
 
-## API Documentation
 
-### Discovery Cycle (`src/index.js`)
-| Function | Description |
-|---|---|
-| `runCycle(opts)` | Run full research cycle {focusDomain, mineflayerBot, minimumRigor} |
-| `registerWithCore(core)` | Register as CraftMind plugin |
+<details>
+<summary><strong>⚓ The Fleet</strong></summary>
 
-### Core Classes
-| Class | Module | Description |
-|---|---|---|
-| `KnowledgeBase` | `knowledge-base.js` | Persistent fact storage |
-| `DiscoveryAgent` | `discovery-agent.js` | Hypothesis generation |
-| `Experiment` | `experiment.js` | Trial runner with conditions |
-| `CriticAgent` | `critic-agent.js` | Research quality evaluator |
-| `TeacherAgent` | `teacher-agent.js` | Behavior script creator |
-| `DistillerAgent` | `distiller-agent.js` | Finding summarizer |
-| `MetaLearner` | `meta-learner.js` | Domain recommendation |
-| `CitationNetwork` | `citation-network.js` | Knowledge graph |
+**Flagship vessels**
 
-### Statistics (`src/statistics.js`)
-| Function | Description |
-|---|---|
-| `tTest(a, b)` | Student's t-test |
-| `effectSize(a, b)` | Cohen's d |
-| `confidenceInterval(data, conf)` | CI calculation |
+- [cocapn.ai](https://github.com/Lucineer/capitaine)
+- [personallog.ai](https://github.com/Lucineer/personallog-ai)
+- [businesslog.ai](https://github.com/Lucineer/businesslog-ai)
+- [studylog.ai](https://github.com/Lucineer/studylog-ai)
+- [makerlog.ai](https://github.com/Lucineer/makerlog-ai)
+- [playerlog.ai](https://github.com/Lucineer/playerlog-ai)
+- [dmlog.ai](https://github.com/Lucineer/dmlog-ai)
+- [reallog.ai](https://github.com/Lucineer/reallog-ai)
+- [deckboss.ai](https://github.com/Lucineer/deckboss-ai)
 
-## Plugin Integration
+**Fleet services**
 
-```js
-import { registerWithCore } from 'craftmind-researcher';
-registerWithCore(core); // Registers as 'researcher' plugin
-```
+- [Fleet Catalog](https://github.com/Lucineer/capitaine/blob/master/docs/fleet/FLEET.md)
+- [Git Agent (full)](https://github.com/Lucineer/git-agent)
+- [Cocapn Lite (minimal)](https://github.com/Lucineer/cocapn-lite)
+- [Fleet Orchestrator](https://github.com/Lucineer/fleet-orchestrator)
+- [Dead Reckoning Engine](https://github.com/Lucineer/dead-reckoning-engine)
+- [Dream Engine](https://github.com/Lucineer/dream-engine)
+- [Seed UI (5 layers)](https://github.com/Lucineer/seed-ui)
 
-## Architecture
+**For power users**
 
-```
-┌──────────────────────────────────────────────────┐
-│              CraftMind Researcher                 │
-├──────────────────────────────────────────────────┤
-│  ┌────────────┐  ┌──────────┐  ┌─────────────┐ │
-│  │ Discovery  │  │Experi-   │  │  Statistical│ │
-│  │ Agent      │→ │ment      │→ │  Analysis   │ │
-│  │(hypotheses)│  │(trials)  │  │  (t-test)   │ │
-│  └─────┬──────┘  └────┬─────┘  └──────┬──────┘ │
-│        │              │               │        │
-│        ▼              ▼               ▼        │
-│  ┌──────────────────────────────────────────┐   │
-│  │        Research Pipeline                 │   │
-│  │  Review → Design → Run → Analyze → Paper │   │
-│  └──────────────────┬───────────────────────┘   │
-│                     │                           │
-│  ┌──────────┐ ┌─────┴──────┐ ┌────────────┐   │
-│  │  Critic  │ │  Behavior  │ │    Meta    │   │
-│  │  Agent   │ │  Scripts   │ │  Learner   │   │
-│  └──────────┘ └────────────┘ └────────────┘   │
-│                                                  │
-│  ┌─────────────────┐  ┌──────────────────────┐  │
-│  │ Knowledge Base  │  │  Citation Network   │  │
-│  └─────────────────┘  └──────────────────────┘  │
-├──────────────────────────────────────────────────┤
-│              registerWithCore(core)              │
-└──────────────────────────────────────────────────┘
-```
+- [Cocapn Lite (tabula rasa)](https://github.com/Lucineer/cocapn-lite)
+- [Cocapn (core platform)](https://github.com/Lucineer/cocapn)
+- [ZeroClaw (framework)](https://github.com/Lucineer/zeroclaw)
 
-## Testing
+[View all 106 repos →](https://github.com/orgs/Lucineer/repositories)
+[Fleet manifest →](https://github.com/Lucineer/capitaine/blob/master/docs/fleet/FLEET.md)
 
-```bash
-npm test          # 43 tests, 9 suites
-node examples/demo.js
-node scripts/playtest.js
-```
+</details>
 
-## Roadmap
-
-See [ROADMAP.md](./ROADMAP.md) for detailed plans.
-
-## CraftMind Ecosystem
-
-| Repo | Description |
-|------|-------------|
-| [craftmind](https://github.com/CedarBeach2019/craftmind) | 🤖 Core bot framework |
-| [craftmind-fishing](https://github.com/CedarBeach2019/craftmind-fishing) | 🎣 Sitka Sound fishing RPG |
-| [craftmind-studio](https://github.com/CedarBeach2019/craftmind-studio) | 🎬 AI filmmaking engine |
-| [craftmind-courses](https://github.com/CedarBeach2019/craftmind-courses) | 📚 In-game learning system |
-| [**craftmind-researcher**](https://github.com/CedarBeach2019/craftmind-researcher) | 🔬 AI research assistant |
-| [craftmind-herding](https://github.com/CedarBeach2019/craftmind-herding) | 🐑 Livestock herding AI |
-| [craftmind-circuits](https://github.com/CedarBeach2019/craftmind-circuits) | ⚡ Redstone circuit design |
-| [craftmind-ranch](https://github.com/CedarBeach2019/craftmind-ranch) | 🌾 Genetic animal breeding |
-| [craftmind-discgolf](https://github.com/CedarBeach2019/craftmind-discgolf) | 🥏 Disc golf simulation |
 
 ## License
 
-MIT
+MIT · Superinstance & Lucineer (DiGennaro et al.)

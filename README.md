@@ -1,55 +1,62 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/Lucineer/capitaine/master/docs/capitaine-logo.jpg" alt="Capitaine" width="120">
-</p>
+# craftmind-researcher
 
-<h1 align="center">craftmind-researcher</h1>
-
-<p align="center">AI self-improvement for Minecraft bots.</p>
+An agent runtime for autonomous discovery and experimentation in Minecraft. It enables bots to propose hypotheses, run controlled tests, and learn from the results.
 
 ---
 
-**CraftMind ecosystem** · Part of the [Lucineer fleet](https://github.com/orgs/Lucineer/repositories)
+## Why it exists
 
-## The Fleet
+Most Minecraft bots follow static scripts or execute predefined tasks. This project provides a different foundation: a runtime where an agent can identify what it doesn't know, design experiments to fill those gaps, and incorporate verified findings into its behavior. The goal is to move from programmed instructions to learned understanding.
 
+> [!NOTE]
+> **Current Limitation:** This runtime designs and analyzes experiments, but requires a separate, controllable Minecraft bot (like Baritone) to execute the in-game actions. It's the "mind," not the "body."
 
-<details>
-<summary><strong>⚓ The Fleet</strong></summary>
+## Quick Start
 
-**Flagship vessels**
+1.  **Fork this repository.** This is your independent copy.
+2.  **Deploy to Cloudflare Workers:** `wrangler deploy`
+3.  **Add your LLM API key** as a Worker secret: `wrangler secret put ANTHROPIC_API_KEY`
+4.  **Connect a Minecraft bot** to execute the experiments the runtime designs.
 
-- [cocapn.ai](https://github.com/Lucineer/capitaine)
-- [personallog.ai](https://github.com/Lucineer/personallog-ai)
-- [businesslog.ai](https://github.com/Lucineer/businesslog-ai)
-- [studylog.ai](https://github.com/Lucineer/studylog-ai)
-- [makerlog.ai](https://github.com/Lucineer/makerlog-ai)
-- [playerlog.ai](https://github.com/Lucineer/playerlog-ai)
-- [dmlog.ai](https://github.com/Lucineer/dmlog-ai)
-- [reallog.ai](https://github.com/Lucineer/reallog-ai)
-- [deckboss.ai](https://github.com/Lucineer/deckboss-ai)
+You can see live agents and discoveries from the community in the public fleet:
+👉 [The Fleet](https://the-fleet.casey-digennaro.workers.dev)
 
-**Fleet services**
+---
 
-- [Fleet Catalog](https://github.com/Lucineer/capitaine/blob/master/docs/fleet/FLEET.md)
-- [Git Agent (full)](https://github.com/Lucineer/git-agent)
-- [Cocapn Lite (minimal)](https://github.com/Lucineer/cocapn-lite)
-- [Fleet Orchestrator](https://github.com/Lucineer/fleet-orchestrator)
-- [Dead Reckoning Engine](https://github.com/Lucineer/dead-reckoning-engine)
-- [Dream Engine](https://github.com/Lucineer/dream-engine)
-- [Seed UI (5 layers)](https://github.com/Lucineer/seed-ui)
+## How it works
 
-**For power users**
+The runtime implements a cycle of observation, experimentation, and validation.
+*   **Hypothesis Generation:** The agent reviews its knowledge graph to identify gaps and proposes specific, testable questions.
+*   **Experimental Design:** It creates A/B test plans that isolate variables to reduce confounding factors.
+*   **Statistical Analysis:** Results are evaluated using confidence intervals and checks for reproducibility.
+*   **Knowledge Integration:** Verified discoveries are added to a cited graph and can be compiled into executable behavior scripts.
+*   **Peer Review:** A separate critic agent evaluates experiment designs before they are run.
 
-- [Cocapn Lite (tabula rasa)](https://github.com/Lucineer/cocapn-lite)
-- [Cocapn (core platform)](https://github.com/Lucineer/cocapn)
-- [ZeroClaw (framework)](https://github.com/Lucineer/zeroclaw)
+## What to expect
 
-[View all 106 repos →](https://github.com/orgs/Lucineer/repositories)
-[Fleet manifest →](https://github.com/Lucineer/capitaine/blob/master/docs/fleet/FLEET.md)
+*   **No Hardcoded Game Knowledge:** The agent starts with no pre-programmed facts about Minecraft. Everything is learned.
+*   **Stateless & Serverless:** Built for Cloudflare Workers with zero runtime dependencies.
+*   **Fork-First Philosophy:** You own and modify your version. There is no central authority.
+*   **Direct API Calls:** All LLM calls go directly from your Worker to your provider. No third-party servers.
 
-</details>
+---
 
+## Architecture
+
+This is a runtime built on the [Cocapn Fleet](https://the-fleet.casey-digennaro.workers.dev) protocol. It handles the reasoning, planning, and analysis layers for an autonomous research agent. Independent agents can share and validate findings across the fleet.
+
+---
+
+## Contributing
+
+Fork the repository and adapt it for your use. Pull requests for core runtime improvements are welcome, but you are never obligated to contribute changes back.
 
 ## License
 
-MIT · Superinstance & Lucineer (DiGennaro et al.)
+MIT License · Superinstance & Lucineer (DiGennaro et al.)
+
+---
+
+<div align="center">
+  <a href="https://the-fleet.casey-digennaro.workers.dev">The Fleet</a> · <a href="https://cocapn.ai">Cocapn</a>
+</div>

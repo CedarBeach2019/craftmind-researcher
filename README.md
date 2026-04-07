@@ -1,62 +1,53 @@
 # craftmind-researcher
 
-An agent runtime for autonomous discovery and experimentation in Minecraft. It enables bots to propose hypotheses, run controlled tests, and learn from the results.
+A Cocapn Fleet agent that learns Minecraft mechanics from scratch by forming hypotheses and running in-game experiments. It doesn't start with any hardcoded game knowledge.
 
----
+👉 **Live Demo:** [The Fleet](https://the-fleet.casey-digennaro.workers.dev)
 
-## Why it exists
+## Why This Exists
 
-Most Minecraft bots follow static scripts or execute predefined tasks. This project provides a different foundation: a runtime where an agent can identify what it doesn't know, design experiments to fill those gaps, and incorporate verified findings into its behavior. The goal is to move from programmed instructions to learned understanding.
-
-> [!NOTE]
-> **Current Limitation:** This runtime designs and analyzes experiments, but requires a separate, controllable Minecraft bot (like Baritone) to execute the in-game actions. It's the "mind," not the "body."
+Most Minecraft agents operate from a complete, pre-programmed rulebook. This agent starts with an empty one. It is designed to discover game mechanics—like sugarcane needing adjacent water—through the same process of trial and error you used when you first played.
 
 ## Quick Start
 
-1.  **Fork this repository.** This is your independent copy.
-2.  **Deploy to Cloudflare Workers:** `wrangler deploy`
-3.  **Add your LLM API key** as a Worker secret: `wrangler secret put ANTHROPIC_API_KEY`
-4.  **Connect a Minecraft bot** to execute the experiments the runtime designs.
+This is a fork-first repository. You will run your own independent agent.
 
-You can see live agents and discoveries from the community in the public fleet:
-👉 [The Fleet](https://the-fleet.casey-digennaro.workers.dev)
+1.  **Fork this repository** to your own GitHub account.
+2.  Deploy it to Cloudflare Workers:
+    ```bash
+    npx wrangler deploy
+    ```
+3.  Add your LLM API key as a secret (Anthropic's Claude is the default):
+    ```bash
+    npx wrangler secret put ANTHROPIC_API_KEY
+    ```
+4.  Configure a controllable Minecraft bot client (e.g., one using Baritone) to send game events and receive actions from your new Worker URL.
 
----
+Your agent will now run autonomously. It will identify gaps in its knowledge, design controlled experiments in the game world, and document proven facts.
 
-## How it works
+## How It Works
 
-The runtime implements a cycle of observation, experimentation, and validation.
-*   **Hypothesis Generation:** The agent reviews its knowledge graph to identify gaps and proposes specific, testable questions.
-*   **Experimental Design:** It creates A/B test plans that isolate variables to reduce confounding factors.
-*   **Statistical Analysis:** Results are evaluated using confidence intervals and checks for reproducibility.
-*   **Knowledge Integration:** Verified discoveries are added to a cited graph and can be compiled into executable behavior scripts.
-*   **Peer Review:** A separate critic agent evaluates experiment designs before they are run.
+The agent runs a continuous loop of observation, hypothesis, and testing. It manages an internal knowledge graph, spots missing or uncertain information, and designs A/B tests to isolate single variables. Results are analyzed for statistical consistency before a conclusion is added to its knowledge base.
 
-## What to expect
+**What it does:**
+*   Identifies gaps and contradictions in its own knowledge graph.
+*   Designs controlled experiments that change only one variable at a time.
+*   Requires reproducible results before accepting a finding.
+*   Logs every learned fact with citations to the source experiment data.
+*   Runs as a single, stateless Cloudflare Worker with zero external dependencies.
 
-*   **No Hardcoded Game Knowledge:** The agent starts with no pre-programmed facts about Minecraft. Everything is learned.
-*   **Stateless & Serverless:** Built for Cloudflare Workers with zero runtime dependencies.
-*   **Fork-First Philosophy:** You own and modify your version. There is no central authority.
-*   **Direct API Calls:** All LLM calls go directly from your Worker to your provider. No third-party servers.
+**Note:** This agent is the **research brain**. You must provide the **bot body**—a separate Minecraft client that can execute its action commands and report back game state.
 
----
+## Limitations
+
+The agent's learning speed is constrained by in-game time and LLM processing latency. A single hypothesis, from design to confirmed result, typically takes **4-6 minutes of real-world time** to complete. It cannot learn mechanics that require events it cannot perceive or actions it cannot execute.
 
 ## Architecture
 
-This is a runtime built on the [Cocapn Fleet](https://the-fleet.casey-digennaro.workers.dev) protocol. It handles the reasoning, planning, and analysis layers for an autonomous research agent. Independent agents can share and validate findings across the fleet.
-
----
-
-## Contributing
-
-Fork the repository and adapt it for your use. Pull requests for core runtime improvements are welcome, but you are never obligated to contribute changes back.
+This is a reasoning runtime built on the Cocapn Fleet protocol. It handles the cognitive loop of question generation, experimental design, and analysis. It outputs action commands (e.g., "place block at x,y,z") and ingests observations (e.g., "block at x,y,z is now sand").
 
 ## License
 
-MIT License · Superinstance & Lucineer (DiGennaro et al.)
+MIT License. You are free to use, copy, modify, and distribute this software.
 
----
-
-<div align="center">
-  <a href="https://the-fleet.casey-digennaro.workers.dev">The Fleet</a> · <a href="https://cocapn.ai">Cocapn</a>
-</div>
+<div style="text-align:center;padding:16px;color:#64748b;font-size:.8rem"><a href="https://the-fleet.casey-digennaro.workers.dev" style="color:#64748b">The Fleet</a> &middot; <a href="https://cocapn.ai" style="color:#64748b">Cocapn</a></div>

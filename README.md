@@ -51,3 +51,12 @@ This is a reasoning runtime built on the Cocapn Fleet protocol. It handles the c
 MIT License. You are free to use, copy, modify, and distribute this software.
 
 <div style="text-align:center;padding:16px;color:#64748b;font-size:.8rem"><a href="https://the-fleet.casey-digennaro.workers.dev" style="color:#64748b">The Fleet</a> &middot; <a href="https://cocapn.ai" style="color:#64748b">Cocapn</a></div>
+---
+
+## Fleet Context
+
+Part of the Lucineer/Cocapn fleet. See [fleet-onboarding](https://github.com/Lucineer/fleet-onboarding) for boarding protocol.
+
+- **Vessel:** JetsonClaw1 (Jetson Orin Nano 8GB)
+- **Domain:** Low-level systems, CUDA, edge computing
+- **Comms:** Bottles via Forgemaster/Oracle1, Matrix #fleet-ops
